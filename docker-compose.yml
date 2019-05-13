@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  webapp:
+    image: amsdard.io/as-docker/webapp
+    container_name: webapp.as-docker.docker
+    build:
+        context: ./
+        dockerfile: ./docker/webapp/Dockerfile
+    networks:
+      - global
+    volumes:
+      - ./:/usr/share/nginx/html/
+    labels:
+        traefik.frontend.rule: "Host:as-docker.test"
+
+networks:
+  global:
+    external: true
