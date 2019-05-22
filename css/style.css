@@ -491,35 +491,35 @@ h6 {
   padding: 60px 0;
 }
 
-#about .about-container .background {
+.about-container .background {
   margin: 20px 0;
 }
 
-#about .about-container .content {
+.about-container .content {
   background: #fff;
 }
 
-#about .about-container .title {
+.about-container .title {
   color: #333;
   font-weight: 700;
   font-size: 32px;
 }
 
-#about .about-container p {
+.about-container p {
   line-height: 26px;
 }
 
-#about .about-container p:last-child {
+.about-container p:last-child {
   margin-bottom: 0;
 }
 
-#about .about-container .icon-box {
+.about-container .icon-box {
   background: #fff;
   background-size: cover;
   padding: 0 0 30px 0;
 }
 
-#about .about-container .icon-box .icon {
+.about-container .icon-box .icon {
   float: left;
   background: #fff;
   width: 64px;
@@ -547,31 +547,31 @@ h6 {
   transition: all 0.3s ease-in-out;
 }
 
-#about .about-container .icon-box .icon i {
+.about-container .icon-box .icon i {
   color: #007bff;
   font-size: 24px;
 }
 
-#about .about-container .icon-box:hover .icon {
+.about-container .icon-box:hover .icon {
   background: #007bff;
 }
 
-#about .about-container .icon-box:hover .icon i {
+.about-container .icon-box:hover .icon i {
   color: #fff;
 }
 
-#about .about-container .icon-box .title {
+.about-container .icon-box .title {
   margin-left: 80px;
   font-weight: 600;
   margin-bottom: 5px;
   font-size: 18px;
 }
 
-#about .about-container .icon-box .title a {
+.about-container .icon-box .title a {
   color: #283d50;
 }
 
-#about .about-container .icon-box .description {
+.about-container .icon-box .description {
   margin-left: 80px;
   line-height: 24px;
   font-size: 14px;
@@ -669,16 +669,16 @@ h6 {
   margin-left: 10px;
 }
 
-#why-us {
+#installers {
   padding: 60px 0;
   background: #004a99;
 }
 
-#why-us .section-header h3,
-#why-us .section-header p {
+#installers .section-header h3,
+#installers .section-header p {
   color: #fff;
 }
-#why-us .card {
+#installers .card {
   background: #00458f;
   border-color: #00458f;
   border-radius: 10px;
@@ -689,34 +689,34 @@ h6 {
   transition: 0.3s ease-in-out;
   height: 100%;
 }
-#why-us .card img {
+#installers .card img {
     width: 64px;
     height: 64px;
     margin: auto;
 }
 
-#why-us .card:hover {
+#installers .card:hover {
   background: #003b7a;
   border-color: #003b7a;
 }
 
-#why-us .card i {
+#installers .card i {
   font-size: 48px;
   padding-top: 15px;
   color: #bfddfe;
 }
 
-#why-us .card h5 {
+#installers .card h5 {
   font-size: 22px;
   font-weight: 600;
 }
 
-#why-us .card p {
+#installers .card p {
   font-size: 15px;
   color: #d8eafe;
 }
 
-#why-us .card .readmore {
+#installers .card .readmore {
   color: #fff;
   font-weight: 600;
   display: inline-block;
@@ -724,15 +724,15 @@ h6 {
   border-bottom: #00458f solid 2px;
 }
 
-#why-us .card .readmore:hover {
+#installers .card .readmore:hover {
   border-bottom: #fff solid 2px;
 }
 
-#why-us .counters {
+#installers .counters {
   padding-top: 40px;
 }
 
-#why-us .counters span {
+#installers .counters span {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 48px;
@@ -740,7 +740,7 @@ h6 {
   color: #fff;
 }
 
-#why-us .counters p {
+#installers .counters p {
   padding: 0;
   margin: 0 0 20px 0;
   font-family: "Montserrat", sans-serif;
@@ -896,8 +896,21 @@ h6 {
   opacity: 1;
 }
 
-/* Testimonials Section
---------------------------------*/
+  /* Demo Section
+  --------------------------------*/
+
+#demo {
+  padding: 60px 0;
+  box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+#demo .section-header {
+  margin-bottom: 40px;
+}
+
+  /* Testimonials Section
+  --------------------------------*/
 
 #testimonials {
   padding: 60px 0;
@@ -1051,18 +1064,18 @@ h6 {
 /* Clients Section
 --------------------------------*/
 
-#clients {
+#images {
   padding: 60px 0;
   box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
-#clients .clients-wrap {
+#images .images-wrap {
   border-top: 1px solid #d6eaff;
   border-left: 1px solid #d6eaff;
   margin-bottom: 30px;
 }
 
-#clients .client-logo {
+#images .client-logo {
   padding: 64px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1083,12 +1096,12 @@ h6 {
   height: 160px;
 }
 
-#clients .client-logo:hover img {
+#images .client-logo:hover img {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
 
-#clients img {
+#images img {
   transition: all 0.4s ease-in-out;
 }
 
@@ -1406,7 +1419,7 @@ h6 {
     text-align: center;
   }
 
-  #why-us .card {
+  #installers .card {
     margin: 0;
   }
 }
