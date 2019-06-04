@@ -40,37 +40,29 @@
   }
 
   // Smooth scroll for the navigation and links with .scrollto classes
-  $('.main-nav a, .mobile-nav a, .scrollto').on('click', function() {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+  $('.main-nav a, .mobile-nav a, .scrollto').on('click', function(event) {
+      // Figure out element to scroll to
       var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
       if (target.length) {
-        var top_space = 0;
-
-        if ($('#header').length) {
-          top_space = $('#header').outerHeight();
-
-          if (! $('#header').hasClass('header-scrolled')) {
-            top_space = top_space - 20;
-          }
-        }
-
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
         $('html, body').animate({
-          scrollTop: target.offset().top - top_space
-        }, 1500, 'easeInOutExpo');
-
-        if ($(this).parents('.main-nav, .mobile-nav').length) {
-          $('.main-nav .active, .mobile-nav .active').removeClass('active');
-          $(this).closest('li').addClass('active');
-        }
-
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('.mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-          $('.mobile-nav-overly').fadeOut();
-        }
-        return false;
+          scrollTop: target.offset().top
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+          var $target = $(target);
+          $target.focus();
+          if ($target.is(":focus")) { // Checking if the target was focused
+            return false;
+          } else {
+            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+            $target.focus(); // Set focus again
+          };
+        });
       }
-    }
   });
 
   // Navigation active state on scroll
@@ -80,11 +72,11 @@
 
   $(window).on('scroll', function () {
     var cur_pos = $(this).scrollTop();
-  
+
     nav_sections.each(function() {
       var top = $(this).offset().top - main_nav_height,
           bottom = top + $(this).outerHeight();
-  
+
       if (cur_pos >= top && cur_pos <= bottom) {
         main_nav.find('li').removeClass('active');
         main_nav.find('a[href="#'+$(this).attr('id')+'"]').parent('li').addClass('active');
@@ -106,7 +98,7 @@
     $('#portfolio-flters li').on( 'click', function() {
       $("#portfolio-flters li").removeClass('filter-active');
       $(this).addClass('filter-active');
-  
+
       portfolioIsotope.isotope({ filter: $(this).data('filter') });
     });
   });
