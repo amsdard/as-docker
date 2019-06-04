@@ -1,13 +1,12 @@
 AS-Docker
 ========================
-* [local] asdocker.test
-* [dev] as-docker.app.amsdard.io
-* [live] as-docker.amsdard.io
+* [local] [asdocker.test](http://asdocker.test/)
+* [dev] [as-docker.app.amsdard.io](https://as-docker.app.amsdard.io/)
+* [live] [as-docker.amsdard.io](https://as-docker.amsdard.io/)
 
 Requirements
 ---
- * configure your local [projects enrironment](https://bitbucket.org/as-docker/projects-environment)
- * make sure You have [YAKE](https://yake.amsdard.io/) installed
+ * [AS-Docker](https://as-docker.amsdard.io/)
 
 Run project
 ---

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   webapp:
-    image: amsdard.io/as-docker/webapp
+    image: amsdard.io/asdocker/webapp
     container_name: webapp.as-docker.docker
     build:
         context: ./
