@@ -138,10 +138,6 @@ Prism.languages.yaml={scalar:{pattern:/([\-:]\s*(?:![^\s]+)?[ \t]*[|>])[ \t]*(?:
       $('.back-to-top').fadeOut('slow');
     }
   });
-  $('.back-to-top').click(function(){
-    $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
-    return false;
-  });
 
   // Initiate the wowjs animation library
   new WOW().init();
@@ -171,7 +167,7 @@ Prism.languages.yaml={scalar:{pattern:/([\-:]\s*(?:![^\s]+)?[ \t]*[|>])[ \t]*(?:
       event.preventDefault();
       $('html, body').animate({
         scrollTop: target.offset().top
-      }, 1000, function() {
+      }, 700, function() {
         // Callback after animation
         // Must change focus!
         var $target = $(target);
