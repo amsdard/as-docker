@@ -117,8 +117,8 @@ Header
                             Other ones have <strong>more than 1 project installed</strong> and they need a custom
                             Frontend port, so they changed <code>80</code> port to <code>81</code>.
                             <br><br>
-                            But yet another developers <strong>can’t run Mongo on the default port</strong>, so they
-                            want to change it also.. Finding a final ports is a huge headache for the developer team.
+                            But yet other developers <strong>can’t run Mongo on the default port</strong>,
+                            so they want to change it as well. It's a real headache for the development team!
                         </p>
                     </div>
 
@@ -126,15 +126,12 @@ Header
                         <div class="icon"><i class="fa fa fa-window-restore"></i></div>
                         <h4 class="title">Multi-projects environment</h4>
                         <p class="description">
-                            There is a common case on the real environment to <strong>have many microservices</strong>
-                            (a separate projects / directories) under the single stack. When we create a new project and
-                            we
-                            add a <code>ElasticSearch</code> and a <code>Worker</code> app inside, it’d be great to
-                            communicate somehow the <code>Backend</code> with <code>Worker</code> or
-                            <code>ElasticSearch</code>.
+                            There is a common case on the real environment to have <strong>many microservices</strong> (a separate projects/directories) under the single stack.
+                            When we create a new project and we add an <code>ElasticSearch</code> and a <code>Worker</code> app inside,
+                            it’d be great to communicate somehow the <code>Backend</code> with <code>Worker</code> or <code>ElasticSearch</code>.
                             <br><bR>
                             By default, the <code>external_link</code> param can be used, but then <strong>we can’t
-                            create a reverse communication</strong> this way. In other words we can request
+                            create a reverse communication</strong>. In other words we can request
                             <code>Worker</code> from <code>Backend</code>, but we can’t request <code>Backend</code>
                             from <code>Worker</code>.
                             <br><br>
@@ -186,34 +183,32 @@ Header
                 <div class="col-lg-8 wow fadeInUp pt-5 pt-lg-0">
                     <h4>AS-Docker - basic concept</h4>
                     <p>
-                        To meet the development team expectations, we have to create some solution to <u>handle many
+                        To meet the development team expectations, we have created a solution to <u>handle many
                         projects under one local machine</u>. The main goal was to enable <strong>two-way
                         communication</strong> between all the containers, <strong>remove ports mapping</strong> and the
-                        most important one: <strong>no external tools used</strong> or other applications. We want to
-                        use only a pure
-                        Docker.
+                        most important one: <strong>do not use any external tools</strong> or other applications,
+                        only a pure Docker environment.
                     </p>
                     <p>
-                        We've started from adding a one, global project called <code>Environment</code>. We decided to
+                        We have started by adding one global project called <code>Environment</code>. We decided to
                         use <a href="https://traefik.io" target="_blank"><i class="fa fa-external-link"></i> Traefik</a>
-                        as a <strong>global proxy for all web-based containers</strong>. Traefik is mapped on local
-                        <code>80</code> port and it recognises the <code>Host</code> header to pass the request to the
-                        proper Container.
+                        as a <strong>global proxy for all web-based containers</strong>. Traefik container is mapped on local
+                        <code>80</code> port and it recognises the <code>Host</code> header to pass the request to the proper Container.
                     </p>
                     <p>
-                        The next step was to create a <strong>SSH tunnel</strong> for all the containers. We
-                        use a simple SSH app, with the ability to <u>reach all other containers by their names</u>. We
-                        have mapped the SSH to local <code>2222</code> port and as a result we can <strong>connect all
-                        the
-                        non-web containers</strong> like <code>MySQL</code>, <code>Mongo</code> or <code>Redis</code>
+                        The next step was to create a <strong>SSH tunnel</strong> for all the containers.
+                        We decided to use a simple SSH app,, with the ability to <u>reach all other containers by their names</u>.
+                        We have mapped it to local port <code>2222</code> and as a result,
+                        we can <strong>connect all the non-web containers</strong> like <code>MySQL</code>, <code>Mongo</code> or <code>Redis</code>
                         via this tunnel.
                     </p>
                     <p>
-                        But there was one more important issue left. Containers should be <strong>able to connect with
-                        each other</strong> with no <code>link</code> or <code>external_link</code> params. All the
-                        containers have to <strong>belong to a one global network</strong> - let’s call it
-                        <code>global</code>. Then the <code>container_name</code> becomes a Docker internal host of the
-                        container - as long as any other container is under the same network.
+                        But, one more important issue has been left. Containers should be <strong>able to connect with
+                        each other</strong> with no <code>link</code> or <code>external_link</code> params.
+                        Thanks to one of the latest Docker features called “native routing”, now it’s made easy!
+                        All the containers have to <strong>belong to a one global network</strong> - let’s call it
+                        <code>global</code>. Then the <code>container_name</code> becomes a Docker internal host of the container.
+                        As long as any other container is used under the same network, it can connect to the other container via the container’s name as a host.
                     </p>
                     <p>
                         <a href="img/docker/env-local.png" data-lightbox="img/docker/env-local.png"
@@ -223,18 +218,23 @@ Header
                     </p>
                     <p>
                         All the <code>*.test</code> domains are pointed to <code>localhost</code>. There are accessible
-                        via the Browser. Inside the Docker, the <code>global</code> network handles all the <code>*.docker</code>
-                        hosts inside the
-                        containers. Both: <code>*.test</code> and <code>*.docker</code> names are a <strong>AS-Docker
-                        standard</strong> only (it's recommended but not required to use it).
+                        via the Browser. <code>Global</code> network handles all the <code>*.docker</code> hosts inside the containers.
+                        Both: <code>*.test</code> and <code>*.docker</code> name are an AS-Docker standard only.
+                        <br><br>
+                        Why <code>*.test</code> but not a <code>*.local</code> or <code>*.dev</code> ?
+                        All the popular “developers” global domains like <strong>local</strong>, <strong>dev</strong> or <strong>app</strong> are problematic due to
+                        global domains release in 2018 and 2019, see:
+                        <a href="https://www.blog.google/technology/developers/hello-dev/" target="_blank"><i class="fa fa-external-link"></i>.dev release</a> or
+                        <a href="https://www.blog.google/technology/developers/introducing-app-more-secure-home-apps-web/" target="_blank"><i class="fa fa-external-link"></i> .app release</a>. Moreover, some local and localhost names may not work properly in some operating systems
+                        (see <a href="https://en.wikipedia.org/wiki/.local" target="_blank"><i class="fa fa-external-link"></i> .local domain issues</a>).
+                        We’ve decided to use <strong>recommended, suggested by the community, logical and the simplest names</strong>.
                         <br><br>
                         To reach the <code>MongoDB</code> or <code>MySQL</code> through the local GUI (like MongoDB
                         Compass), we have to connect via <code>root@localhost:2222</code> tunnel, using <code>mysql.docker</code>
                         or <code>mongo.docker</code> as a host.
                         <br><br>See <a href="/#demo">Demo</a> section for more details.<br><bR>
                         <strong>Each of the projects is encapsulated now</strong>, it doesn’t map any ports, no <code>external_link</code>
-                        are needed and all the development team has <strong>one and the same stack</strong>, no matter
-                        how many other different project they’re working on. We made all the guys happy :)
+                        is needed and the development team has <strong>one the same stack</strong>, no matter how many other different projects they’re working on. Now the <strong>developers can be focused on the code</strong> instead of struggling with finding a correct way how to set up and maintain the project.
                     </p>
                 </div>
             </div>
@@ -265,15 +265,12 @@ Header
 
                         <div class="description">
                             But each time we want to run a <code>./manage.py</code> script, we have to type the whole
-                            <code>exec</code> command. It’s definitely <strong>not something developers would
-                            love</strong>.
+                            <code>exec</code> command. It’s definitely <strong>not something developers love</strong>.
+                            <br>
+                            They would like to have a manage local alias to execute such tasks.
                             <br><br>
-                            <blockquote>
-                                <i>&quot;It would be great to have a local alias to execute such tasks&quot;</i> - we
-                                said
-                            </blockquote>
-                            The solution was not as easy as we thought. But we’ve managed to create a <strong>dedicated
-                            and simple tool</strong> called:
+
+                            The solution was not as easy as we thought. Nevertheless, we’ve managed to create a <strong>dedicated but still simple tool</strong> called:
                             <a href="https://yake.amsdard.io"><i class="fa fa-external-link"></i> Yake - manage project
                                 aliases</a>.
                             <br><br>
@@ -851,12 +848,12 @@ yake up</code></pre>
                     </a>
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
+                <div class="col-lg-3 d-none d-lg-block">
                     <div class="client-logo">
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-xs-6">
+                <div class="col-lg-3 d-none d-lg-block">
                     <div class="client-logo">
                     </div>
                 </div>
