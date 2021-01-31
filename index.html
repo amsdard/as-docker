@@ -584,12 +584,10 @@ yake --help</code></pre>
                     <h4>Environment - local</h4>
                     <ol>
                         <li>Create a new directory <code>~/Projects</code>.</li>
-                        <li>Download the <code>docker-compose.yml</code> from <a
+                        <li>Clone <code>local/</code> directory from <a
                                 href="https://bitbucket.org/as-docker/projects-environment/src/master/" target="_blank"><i
-                                class="fa fa-external-link"></i> as-docker/projects-environment</a> repository (<code>./local</code>
-                            path).
-                            <pre><code class="language-bash">wget -O ~/Projects/docker-compose.yml \
-https://bitbucket.org/as-docker/projects-environment/raw/9ae4ab8f9e87ef0812f681dac279044166a16e9e/local/docker-compose.yml</code></pre>
+                                class="fa fa-external-link"></i> as-docker/projects-environment</a> repository into your local <code>~/Projects</code>.
+                            <pre><code class="language-bash">git archive --remote=git@bitbucket.org:as-docker/projects-environment.git HEAD local/ | tar -x --strip=1</code></pre>
                         </li>
                         <li>
                             Create Docker <code>global</code> network.
@@ -597,7 +595,9 @@ https://bitbucket.org/as-docker/projects-environment/raw/9ae4ab8f9e87ef0812f681d
                         </li>
                         <li>
                             Setup the stack.
-                            <pre><code class="language-bash">docker-compose up -d</code></pre>
+                            <pre><code class="language-bash">docker-compose build --pull --build-arg ID_RSA_PUB="$(cat ~/.ssh/id_rsa.pub)"
+docker-compose pull
+docker-compose up -d --force-recreate</code></pre>
                         </li>
                         <li>
                             Run <a href="http://portainer.test/" rel="nofollow" target="_blank"><i
